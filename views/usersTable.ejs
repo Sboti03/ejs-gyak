@@ -1,0 +1,44 @@
+<table>
+    <tr>
+        <th>
+            Név
+        </th>
+        <th>
+            Nem
+        </th>
+        <th>
+            Születési idő
+        </th>
+        <th>
+            Egyenleg
+        </th>
+    
+    </tr>
+    <% for( let index = 0; index < users.length; index++ ) { %>
+        <% if (users[index].activity === 'active') { %>
+            <tr>
+                <td><%= users[index].name %> </td>
+                <td> <% if (users[index].gender ==='férfi') { %>
+                    <i class="fa fa-mars"></i>
+                <% } else { %>
+                    <i class="fa fa-venus"></i>
+                <% } %> </td>
+                <% if (users[index].dateOfBirth.getFullYear() < 2000) { %>
+                    <td title="Jogosult a kedvezményre"><%= users[index].dateOfBirth.toDateString() %> </td>
+                <% } else { %>
+                    <td title="Nem jogosult a kedvezményre"><%= users[index].dateOfBirth.toDateString() %> </td>
+                <% } %>
+                
+                <% let balanceClass = 'positive-balance' %> 
+                <% if (users[index].balance == 0) { 
+                     balanceClass = 'zero-balance' %> 
+                <% } else if (users[index].balance < 0) { 
+                        balanceClass ='negative-balance' %> 
+                <% } %>
+                <td class="<%= balanceClass %>">
+                    <%= users[index].balance %>
+                </td>
+            </tr>
+        <% } %>
+    <% } %>
+</table>
